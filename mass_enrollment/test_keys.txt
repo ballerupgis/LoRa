@@ -1,0 +1,13 @@
+DevEUI	AppEUI	AppKey	DevAddr	NwkSKey	AppSKey
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>	<dine-nøgler-her>
+					
+					
+					
+					
