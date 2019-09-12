@@ -12,7 +12,7 @@ print("Kører...")
 user = input("Indtast brugernavn: ")
 dit_pass = input("Dit password: ")
 applikation = input("Hvad er ID på applikationen? (Kig under 'Applications'.: https://iotnet.teracom.dk/application/<ID>):" )
-
+iot_keys = input("Navn på fil med konfigurationsnølger. Filformatet skal ikke angives (standard er her .xlsx): ")
 
 if len(applikation) < 7:
     print("Synes ikke at være korrekt ID. Prøv igen")
@@ -46,7 +46,7 @@ driver.get("https://iotnet.teracom.dk/application/" + str(applikation))
 kolonne = ("DevEUI", "AppEUI", "AppKey")
 
 #Læs lokal fil
-df = pd.read_excel('test_keys.xlsx')
+df = pd.read_excel((iot_keys + '.xlsx'))
 count = df['DevEUI'].count()
 my_json = df.to_dict()
 
