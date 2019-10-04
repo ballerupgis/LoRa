@@ -8,8 +8,6 @@ import pandas as pd
 print("Kører...")
 # LOGIN SITE
 
-#Angiv ID på applikation
-
 
 #Angiv ID på applikation
 
