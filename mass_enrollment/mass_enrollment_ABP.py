@@ -81,10 +81,13 @@ class sendIotKeys(object):
            #Enroll device
            #parameter defineret i toppen
            driver.get("https://iotnet.teracom.dk/application/" + str(applikation)+ "/enrolldevice")
-           time.sleep(1)
+           time.sleep(2)
 
            #Enrollment type proces
+           driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[1]/div[1]/div[1]/div[2]/select").click()
            driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[1]/div[1]/div[1]/div[2]/select/option[1]").click()
+           #One down:
+
 
            #Title
            form = driver.find_element_by_name("title")
