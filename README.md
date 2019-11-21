@@ -6,4 +6,4 @@ Alt efter om du kører enrollment på ABP eller OTAA, vælger du et af de 2 scri
 
 Scriptet kører IKKE i headless tilstand.
 
-Sørg for at dine overskrifter er identisk som eksemplet test_keys.txt
+- Sørg for at dine overskrifter er identisk som eksemplet test_keys.txt og angiv rigtigt navn til excel-fil (se efter variablen df)
