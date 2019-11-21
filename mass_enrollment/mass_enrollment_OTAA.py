@@ -15,6 +15,8 @@ dit_pass = input("Dit password: ")
 applikation = input("Hvad er ID på applikationen? (Kig under 'Applications'.: https://iotnet.teracom.dk/application/<ID>):" )
 
 
+
+
 if len(applikation) < 7:
     print("Synes ikke at være korrekt ID. Prøv igen")
     breakpoint(quit())
@@ -65,6 +67,7 @@ class sendIotKeys(object):
 
         def parseFile(self):
             try:
+                pass
                 print(count[i])
             except:
                 pass
@@ -113,7 +116,8 @@ class sendIotKeys(object):
            driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[2]/div/div[3]/div/label/input").click()
 
            #ENROLL THE SUCKER
-           driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[2]/div/div[3]/div/label/input").click()
+           driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[2]/div/div[2]/button").click()
+
            time.sleep(1)
 
 
