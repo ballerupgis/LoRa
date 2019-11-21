@@ -7,14 +7,11 @@ import pandas as pd
 print("Kører...")
 # LOGIN SITE
 
-
 #Angiv ID på applikation
 
 user = input("Indtast brugernavn: ")
 dit_pass = input("Dit password: ")
 applikation = input("Hvad er ID på applikationen? (Kig under 'Applications'.: https://iotnet.teracom.dk/application/<ID>):" )
-
-
 
 
 if len(applikation) < 7:
@@ -27,21 +24,19 @@ else:
 driver = webdriver.Firefox()
 driver.get("https://iotnet.teracom.dk/login")
 
-
-time.sleep(2)
 # user
-form = driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-login/body/div/div[2]/form/div[1]/input")
+form = driver.find_element_by_xpath("/html/body/lrt-masterpage/div/lrt-login/body/div/div[2]/form/div[1]/input")
 form.send_keys(str(user))
 
 # pass
-form = driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-login/body/div/div[2]/form/div[2]/input")
+form = driver.find_element_by_xpath("/html/body/lrt-masterpage/div/lrt-login/body/div/div[2]/form/div[2]/input")
 form.send_keys(str(dit_pass))
 form.submit()
 print("Logget ind")
 time.sleep(1)
 
 # cookies
-form = driver.find_element_by_css_selector("button.btn:nth-child(3)").click()
+form = driver.find_element_by_css_selector("body > lrt-masterpage > div > div > div > button").click()
 
 # APPLICATION
 #Test
@@ -51,12 +46,15 @@ driver.get("https://iotnet.teracom.dk/application/" + str(applikation))
 kolonne = ("DevEUI", "AppEUI", "AppKey")
 
 #Læs lokal fil
-df = pd.read_excel('test_keys.xlsx')
+#df = pd.read_excel('test_keys.xlsx')
+df = pd.read_excel('pir.xlsx')
 count = df['DevEUI'].count()
 my_json = df.to_dict()
 
 
+
 class sendIotKeys(object):
+
 
     try:
 
@@ -67,7 +65,6 @@ class sendIotKeys(object):
 
         def parseFile(self):
             try:
-                pass
                 print(count[i])
             except:
                 pass
@@ -82,8 +79,12 @@ class sendIotKeys(object):
            time.sleep(1)
 
            #Enroll device
+           #parameter defineret i toppen
            driver.get("https://iotnet.teracom.dk/application/" + str(applikation) + "/enrolldevice")
-           time.sleep(2)
+           time.sleep(1)
+
+           #Enrollment proces - OTAA
+           driver.find_element_by_xpath("/html/body/lrt-masterpage/div/nsw-device-enrollment-guided/div/section/lrt-box/div/div[2]/div[1]/div/div[2]/select/option[2]").click()
 
            #Title
            form = driver.find_element_by_name("title")
@@ -112,12 +113,8 @@ class sendIotKeys(object):
 
            time.sleep(1)
 
-           # Enroll another -
-           driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[2]/div/div[3]/div/label/input").click()
-
            #ENROLL THE SUCKER
            driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-device-enrollment-guided/div/section[2]/div/div/div[2]/div/div[2]/button").click()
-
            time.sleep(1)
 
 
@@ -131,6 +128,7 @@ for i in range(count):
     print(row)
 
     length = str(my_json["DevEUI"][i]), len(my_json["AppEUI"][i]), len(my_json["AppKey"][i])
+
     #Tjekker om længde på tegn overholdes. Brug det til at finde fejl.
     print(length)
 
@@ -143,5 +141,5 @@ for i in range(count):
 time.sleep(1)
 print("https://iotnet.teracom.dk/application/" + str(applikation) + "/devices")
 driver.get("https://iotnet.teracom.dk/application/" + str(applikation) + "/devices")
+print('Done')
 
-print('Færdig')
