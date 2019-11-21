@@ -46,8 +46,7 @@ driver.get("https://iotnet.teracom.dk/application/" + str(applikation))
 kolonne = ("DevEUI", "AppEUI", "AppKey")
 
 #Læs lokal fil
-#df = pd.read_excel('test_keys.xlsx')
-df = pd.read_excel('pir.xlsx')
+df = pd.read_excel('test_keys.xlsx')
 count = df['DevEUI'].count()
 my_json = df.to_dict()
 
