@@ -25,11 +25,11 @@ driver = webdriver.Firefox()
 driver.get("https://iotnet.teracom.dk/login")
 
 # user
-form = driver.find_element_by_xpath("/html/body/lrt-masterpage/div/lrt-login/body/div/div[2]/form/div[1]/input")
+form = driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-login/body/div/div[2]/form/div[1]/input")
 form.send_keys(str(user))
 
 # pass
-form = driver.find_element_by_xpath("/html/body/lrt-masterpage/div/lrt-login/body/div/div[2]/form/div[2]/input")
+form = driver.find_element_by_xpath("/html/body/lrt-app/ng-component/div/nsw-login/body/div/div[2]/form/div[2]/input")
 form.send_keys(str(dit_pass))
 form.submit()
 print("Logget ind")
@@ -84,6 +84,7 @@ class sendIotKeys(object):
            time.sleep(1)
 
            #Enrollment proces - OTAA
+           #OBS! Kommenter evt nedenstående ud, da sitet allerede forduvælger OTAA eller ABP
            driver.find_element_by_xpath("/html/body/lrt-masterpage/div/nsw-device-enrollment-guided/div/section/lrt-box/div/div[2]/div[1]/div/div[2]/select/option[2]").click()
 
            #Title
