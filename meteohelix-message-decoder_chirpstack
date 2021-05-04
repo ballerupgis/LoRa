@@ -1,0 +1,85 @@
+var pos = 0;
+var bindata = "";
+
+var ConvertBase = function (num) {
+    return {
+        from : function (baseFrom) {
+            return {
+                to : function (baseTo) {
+                    return parseInt(num, baseFrom).toString(baseTo);
+                }
+            };
+        }
+    };
+};
+
+function pad(num) {
+    var s = "0000000" + num;
+    return s.slice(-8);
+}
+
+ConvertBase.dec2bin = function (num) {
+    return pad(ConvertBase(num).from(10).to(2));
+};
+
+ConvertBase.bin2dec = function (num) {
+    return ConvertBase(num).from(2).to(10);
+};
+
+function data2bits(data) {
+    var binary = "";
+    for(var i=0; i<data.length; i++) {
+        binary += ConvertBase.dec2bin(data[i]);
+    }
+    return binary;
+}
+
+function bitShift(bits) {
+    var num = ConvertBase.bin2dec(bindata.substr(pos, bits));
+    pos += bits;
+    return Number(num);
+}
+
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+
+function Decoder(bytes, port) {
+  bindata = data2bits(bytes);
+ 
+  //if(bytes.length != 12) return {"status": "ERROR", "describtion": "11 bytes are required"}
+    Type =  bitShift(2);
+    Battery = precisionRound(bitShift(5)*0.05+3, 2);
+    Temperature = precisionRound(bitShift(11)*0.1-100, 1);
+    T_min = precisionRound(Temperature - bitShift(6)*0.1, 1);
+    T_max = precisionRound(Temperature + bitShift(6)*0.1, 1);
+    Humidity = precisionRound(bitShift(9)*0.2, 1);
+    Pressure = bitShift(14)*5+50000;
+    Irradiation = bitShift(10)*2;
+    Irr_max = Irradiation + bitShift(9)*2;
+    Rain = precisionRound(bitShift(8), 1);
+    Rain_min_time = precisionRound(bitShift(8), 1);
+ 
+ 
+  decoded = {
+    "Type": Type,
+    "Battery": Battery,
+    "Temperature": Temperature,
+    "T_min": T_min ,
+    "T_max": T_max,
+    "Humidity": Humidity,
+    "Pressure": Pressure,
+    "Irradiation": Irradiation,
+    "Irr_max": Irr_max,
+    "Rain": Rain,
+    "Rain min time": Rain_min_time
+  };
+
+  return decoded;
+}
+
+// This is the part needed for it to work with ChirpStack
+function Decode(fPort, bytes) {
+  return Decoder(bytes);
+}
